@@ -1,3 +1,10 @@
+<div align="center">
+
+![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&pause=1000&color=36BCF7&width=600&lines=Computer+Science+Engineering+Student;Open+Source+Enthusiast!)
+
+</div>
+
+
 [![MasterHead](https://user-images.githubusercontent.com/90236635/232446433-d5540fa2-fe28-4bb8-b929-cdb51fe61336.gif)](https://rishavchanda.io)
 <h1>💫 About Me:</h1>
 <img align="right" alt="Coding" width="400" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1651780522995/zZbL8WM2v.gif")>
