@@ -1,67 +1,160 @@
+<!-- AESTHETIC FLOATING PARTICLES -->
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=transparent&height=100&section=header&text=&fontSize=0"/>
+  <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/d48893bd-0757-481c-8d7e-ba3e163feae7" width="100%"/>
+</div>
+
+<!-- MULTILINGUAL NAME ANIMATION -->
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=900&size=50&duration=2500&pause=800&color=FFFFFF&background=00000000&center=true&vCenter=true&width=800&height=120&lines=NITIN+SAHU;नितिन+साहू;尼丁+萨胡;ニティン+サフ;니틴+사후;نیتن+ساہو;Нитин+Саху;ΝΙΤΙΝ+ΣΑΗΥ" alt="Multilingual Name"/>
+</div>
+
+<!-- NEON GLOW SEPARATOR -->
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=4000&pause=1000&color=00D9FF&background=00000000&center=true&vCenter=true&width=800&height=50&lines=▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰" alt="Neon Line"/>
+</div>
+
+<!-- SIMPLE ELEGANT SUBTITLE -->
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=20&duration=3000&pause=1500&color=FF6B35&background=00000000&center=true&vCenter=true&width=600&height=60&lines=Full+Stack+Developer;Code+Enthusiast;Problem+Solver" alt="Simple Title"/>
+</div>
+
+<!-- Typing Animation -->
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+</div>
+
+<!-- Multi-line Typing Animation with Emojis -->
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=900&size=35&duration=3000&pause=500&color=FF6B35&background=00000000&center=true&vCenter=true&multiline=true&repeat=true&width=900&height=180&lines=🌟+Welcome+to+My+Digital+Universe+🌟;💻+Computer+Science+Engineering+Student;🚀+Passionate+Full+Stack+Developer;🌱+Always+Learning+%26+Growing;⚡+Turning+Ideas+Into+Reality!" alt="Typing SVG" />
+</div>
+
+<br/>
+
+<!-- Animated Divider -->
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+</div>
+
+<br/>
+
+<!-- Snake Animation -->
+
+
+<br/>
+<br/>
+
+## <img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="30px">&nbsp;***About Me***
+
+<img align="right" alt="Coding" width="400" src="https://raw.githubusercontent.com/devSouvik/devSouvik/master/gif3.gif">
+
+<img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> **Hey there! I'm Nitin Sahu**
+
+- 🔭 **Currently working on:** Full-stack web applications with React & Node.js
+- 🌱 **Learning:** MongoDB, Express.js, and advanced React patterns
+- 👯 **Looking to collaborate on:** Open source projects and innovative web solutions
+- 🤔 **Ask me about:** React, JavaScript, Web Development, and Problem Solving
+- 💬 **Fun fact:** I love turning coffee into code! ☕➡️💻
+- 📫 **Reach me at:** [ns0779687@gmail.com](mailto:ns0779687@gmail.com)
+
+<br/>
+
+<!-- Tech Stack with Animations -->
+## <img src="https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width="32px"> **Technologies & Tools**
+
 <div align="center">
 
-![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&pause=1000&color=36BCF7&width=600&lines=Computer+Science+Engineering+Student;Open+Source+Enthusiast!)
+### 🚀 **Languages**
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+
+### ⚡ **Frameworks & Libraries**
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+### 🛢 **Databases**
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+
+### 🔧 **Tools & Platforms**
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 </div>
 
+<br/>
 
-[![MasterHead](https://user-images.githubusercontent.com/90236635/232446433-d5540fa2-fe28-4bb8-b929-cdb51fe61336.gif)](https://rishavchanda.io)
-<h1>💫 About Me:</h1>
-<img align="right" alt="Coding" width="400" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1651780522995/zZbL8WM2v.gif")>
-<p>Hi 👋, I'm <strong>Nitin Sahu</strong><br>
-I'm a passionate Web Developer<br>
-🌱 Currently learning: MongoDB, Express.js<br>
-🚀 Projects: <a href="https://github.com/nitin-999-code?tab=repositories" target="_blank">Check out my repositories</a><br>
-💬 Ask me about: React<br>
-📫 Reach me at: <a href="mailto:ns0779687@gmail.com">ns0779687@gmail.com</a></p>
+<!-- Connect with Me -->
+## <img src="https://media.giphy.com/media/LnQjpWaON8nhr21vNW/giphy.gif" width="32px"> **Connect with Me**
 
-<h2>🌐 Socials:</h2>
-<p>
-  <a href="https://discord.gg/nitinsahu0621" target="_blank">
-    <img src="https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white" alt="Discord">
-  </a>
-  <a href="https://instagram.com/i_am_nitin999" target="_blank">
-    <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white" alt="Instagram">
-  </a>
-  <a href="https://linkedin.com/in/nitin-sahu-a1b663323" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" alt="LinkedIn">
-  </a>
-  <a href="mailto:ns0779687@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white" alt="Email">
-  </a>
-</p>
+<div align="center">
 
-<h2>💻 Tech Stack:</h2>
-<p align="left">
-<a href="https://twitter.com/nitin sahu" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="nitin sahu" height="30" width="40" /></a>
-<a href="https://linkedin.com/in/nitin sahu" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="nitin sahu" height="30" width="40" /></a>
-<a href="https://instagram.com/i_am_nitin_999" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="i_am_nitin_999" height="30" width="40" /></a>
-<a href="https://www.codechef.com/users/ozzy_999" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.1.0/icons/codechef.svg" alt="ozzy_999" height="30" width="40" /></a>
-<a href="https://codeforces.com/profile/ns0779687" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/codeforces.svg" alt="ns0779687" height="30" width="40" /></a>
-<a href="https://www.leetcode.com/ozzy_999" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="ozzy_999" height="30" width="40" /></a>
-</p>
+[![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/nitinsahu0621)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/nitin-sahu-a1b663323)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/i_am_nitin999)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ns0779687@gmail.com)
 
-<h2>📊 GitHub Stats:</h2>
-<p>
-  <img src="https://github-readme-stats.vercel.app/api?username=nitin-999-code&theme=dark&hide_border=false&include_all_commits=false&count_private=false"><br>
-  <img src="https://nirzak-streak-stats.vercel.app/?user=nitin-999-code&theme=dark&hide_border=false"><br>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nitin-999-code&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact">
-</p>
+### 🏆 **Competitive Programming**
+[![CodeChef](https://img.shields.io/badge/CodeChef-5B4638?style=for-the-badge&logo=codechef&logoColor=white)](https://www.codechef.com/users/ozzy_999)
+[![Codeforces](https://img.shields.io/badge/Codeforces-445f9d?style=for-the-badge&logo=Codeforces&logoColor=white)](https://codeforces.com/profile/ns0779687)
+[![LeetCode](https://img.shields.io/badge/LeetCode-000000?style=for-the-badge&logo=LeetCode&logoColor=#d16c06)](https://www.leetcode.com/ozzy_999)
 
-<h3>✍️ Random Dev Quote</h3>
-<p>
-  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical">
-</p>
+</div>
 
-<h3>🔝 Top Contributed Repo</h3>
-<p>
-  <img src="https://github-contributor-stats.vercel.app/api?username=nitin-999-code&limit=5&theme=dark&combine_all_yearly_contributions=true">
-</p>
+<br/>
 
-<hr>
-<p>
-  <a href="https://visitcount.itsvg.in">
-    <img src="https://visitcount.itsvg.in/api?id=nitin-999-code&icon=0&color=0" alt="Profile Visits">
-  </a>
-</p>
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
+<!-- GitHub Stats -->
+## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="32px"> **GitHub Analytics**
+
+<div align="center">
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=nitin-999-code&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true"/>
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=nitin-999-code&layout=compact&langs_count=8&theme=tokyonight"/>
+</div>
+
+<div align="center">
+  <img src="https://streak-stats.demolab.com/?user=nitin-999-code&theme=tokyonight" alt="GitHub Streak"/>
+</div>
+
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=nitin-999-code&theme=tokyo-night&hide_border=true&area=true" alt="Contribution Graph"/>
+</div>
+
+<br/>
+
+<!-- Trophy Section -->
+
+
+<br/>
+
+
+<!-- Contribution Snake -->
+## 🐍 **Contribution Snake Animation**
+<div align="center">
+  <img src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake-dark.svg" alt="Snake animation" />
+</div>
+
+<br/>
+
+<!-- Footer -->
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Courier+New&weight=400&size=12&duration=100&pause=0&color=00FF41&background=00000000&center=true&vCenter=true&multiline=true&width=1000&height=80&lines=01001000+01100101+01101100+01101100+01101111+01010111+01101111+01110010+01101100+01100100;11000110+10101010+11110000+01010101+11001100+00110011+10101010+11110000;01000110+01110101+01101100+01101100+01010011+01110100+01100001+01100011+01101011;01000100+01100101+01110110+01100101+01101100+01101111+01110000+01100101+01110010" alt="Matrix Code"/>
+</div>
+
+<div align="center">
+  
+### 🌟 **"Code is like humor. When you have to explain it, it's bad."** 🌟
+
+<img src="https://komarev.com/ghpvc/?username=nitin-999-code&label=Profile%20Views&color=brightgreen&style=for-the-badge" alt="Profile Views" />
+
+**⭐ From [nitin-999-code](https://github.com/nitin-999-code) with ❤️**
+
+</div>
