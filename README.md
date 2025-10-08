@@ -13,7 +13,7 @@
 
 <!-- SIMPLE ELEGANT SUBTITLE -->
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=20&duration=3000&pause=1500&color=FF6B35&background=00000000&center=true&vCenter=true&width=600&height=60&lines=Full+Stack+Developer;Code+Enthusiast;Problem+Solver" alt="Simple Title"/>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=20&duration=3000&pause=1500&color=FF6B35&background=00000000&center=true&vCenter=true&width=600&height=60&lines=🌟+Welcome+to+My+Digital+Universe+🌟;💻+Computer+Science+Engineering+Student;🚀+Passionate+Full+Stack+Developer;🌱+Always+Learning+%26+Growing;⚡+Turning+Ideas+Into+Reality!" alt="Simple Title"/>
 </div>
 
 <!-- Typing Animation -->
@@ -21,12 +21,13 @@
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </div>
 
+
 <!-- Multi-line Typing Animation with Emojis -->
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=900&size=35&duration=3000&pause=500&color=FF6B35&background=00000000&center=true&vCenter=true&multiline=true&repeat=true&width=900&height=180&lines=🌟+Welcome+to+My+Digital+Universe+🌟;💻+Computer+Science+Engineering+Student;🚀+Passionate+Full+Stack+Developer;🌱+Always+Learning+%26+Growing;⚡+Turning+Ideas+Into+Reality!" alt="Typing SVG" />
-</div>
+ 
+  <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/d48893bd-0757-481c-8d7e-ba3e163feae7" width="100%"/>
 
-<br/>
+
 
 <!-- Animated Divider -->
 <div align="center">
