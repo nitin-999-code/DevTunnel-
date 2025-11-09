@@ -19,9 +19,22 @@
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </div>
 <!-- Holopin Badge -->
-<div align="center">
-<a href="https://holopin.io/@nitin999code"><img src="https://holopin.io/api/user/board?user=nitin999code" alt="@nitin999code's Holopin board" style="max-width: 280px; width: 100%; height: auto; display: block; margin: 0 auto;"></a>
+<!-- Holopin Badge -->
+<!-- Holopin Badge (No Bottom Gap, Perfectly Fitted) -->
+<!-- Option B: constrained height with object-fit: cover -->
+<div align="center" style="margin:0;padding:0;line-height:0;">
+  <a href="https://holopin.io/@nitin999code" style="display:inline-block;margin:0;padding:0;">
+    <img
+      src="https://holopin.me/nitin999code"
+      alt="@nitin999code's Holopin badges"
+      style="display:block;margin:0 auto;padding:0;line-height:0;max-width:480px;width:100%;
+             height:190px;object-fit:cover;border-radius:10px;"
+    />
+  </a>
 </div>
+
+
+
 <!-- Animated Divider -->
 <div align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
