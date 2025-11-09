@@ -18,37 +18,14 @@
 <div align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </div>
-<br>
-
-
-<!-- Multi-line Typing Animation with Emojis -->
-<!-- <div align="center">
-  <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/d48893bd-0757-481c-8d7e-ba3e163feae7" width="100%"/>
-</div> -->
-
-
 <!-- Holopin Badge -->
 <div align="center">
-
-[![An image of @nitin999code's Holopin badges, which is a link to view their full Holopin profile](https://holopin.me/nitin999code)](https://holopin.io/@nitin999code)
-
+<a href="https://holopin.io/@nitin999code"><img src="https://holopin.io/api/user/board?user=nitin999code" alt="@nitin999code's Holopin board" style="max-width: 280px; width: 100%; height: auto; display: block; margin: 0 auto;"></a>
 </div>
-
-
-
-
 <!-- Animated Divider -->
 <div align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </div>
-
-<br/>
-
-
-
-
-<br/>
-<br/>
 
 ## <img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="30px">&nbsp;***About Me***
 
@@ -69,48 +46,25 @@
 ## <img src="https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width="32px"> **Technologies & Tools**
 
 <div align="center">
-
-<div align="center">
-
-### 🚀 Languages
-<div style="display: inline-flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+<div style="display: inline-flex; gap: 6px; flex-wrap: wrap; justify-content: center;">
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=000" />
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=fff" />
   <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=fff" />
   <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=fff" />
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=fff" />
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=fff" />
-</div>
-
----
-
-### ⚡ Frameworks & Libraries
-<div style="display: inline-flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
   <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=fff" />
   <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express&logoColor=fff" />
   <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=fff" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=fff" />
-</div>
-
----
-
-### 🛢 Databases
-<div style="display: inline-flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
   <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=fff" />
   <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=fff" />
-</div>
-
----
-
-### 🧰 Tools & Platforms
-<div style="display: inline-flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=fff" />
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=fff" />
   <img src="https://img.shields.io/badge/VS_Code-0078D4?style=for-the-badge&logo=visualstudiocode&logoColor=fff" />
   <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=fff" />
 </div>
-
 </div>
 
 <br/>
