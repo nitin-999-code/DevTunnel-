@@ -144,6 +144,6 @@
 <div align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=16&duration=3000&pause=800&color=00FF41&background=00000000&center=true&vCenter=true&width=600&lines=💡+Code+is+like+humor.+When+you+have+to+explain+it,+it's+bad.💡" alt="Quote"/>
 
-**⭐ From [nitin-999-code](https://github.com/nitin-999-code) with ❤️**
+**[🗿🗿🗿🗿](https://github.com/nitin-999-code)**
 
 </div>
