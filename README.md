@@ -1,6 +1,6 @@
 <!-- AESTHETIC FLOATING PARTICLES -->   
 <!-- MULTILINGUAL NAME ANIMATION -->  
-<div align="center">
+<div align="center"> 
   <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=900&size=45&duration=2500&pause=800&color=00D9FF&background=00000000&center=true&vCenter=true&width=800&height=120&lines=NITIN+SAHU;नितिन+साहू;尼丁+萨胡;ニティン+サフ;니틴+사후;Нитин+Саху" alt="Multilingual Name"/>
 </div>
 
