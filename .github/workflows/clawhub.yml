@@ -1,0 +1,23 @@
+name: Notify ClawHub
+
+on:
+  push:
+    branches: [ main ]
+  issues:
+    types: [ opened ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify ClawHub
+        run: |
+          curl -X POST https://clawhub.com/api/agent \
+          -H "Authorization: Bearer ${{ secrets.CLAWHUB_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "event": "github",
+            "repo": "${{ github.repository }}",
+            "actor": "${{ github.actor }}",
+            "message": "Event triggered"
+          }'
