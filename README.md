@@ -2,7 +2,7 @@
 
 A complete developer tunneling platform similar to ngrok with advanced debugging and security features.
 
-## 🎯 Phase 1: Tunnel MVP (Complete)
+##  Phase 1: Tunnel MVP (Complete)
 
 - ✅ WebSocket-based tunnel connections
 - ✅ Public URL generation with subdomain support
@@ -12,7 +12,7 @@ A complete developer tunneling platform similar to ngrok with advanced debugging
 - ✅ CLI with colored terminal output
 - ✅ API endpoints for traffic inspection
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 devtunnel-plus/
@@ -44,7 +44,7 @@ devtunnel-plus/
 └── package.json            # Root workspace config
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install Dependencies
 
@@ -93,7 +93,7 @@ This will:
 curl -H "Host: {subdomain}.localhost:3000" http://localhost:3000/test
 ```
 
-## 💻 CLI Commands
+## CLI Commands
 
 ```bash
 # Create HTTP tunnel
@@ -110,7 +110,7 @@ devtunnel http <port> [options]
 devtunnel status
 ```
 
-## 🔌 API Endpoints
+## API Endpoints
 
 | Endpoint | Description |
 |----------|-------------|
@@ -122,7 +122,7 @@ devtunnel status
 | `GET /api/traffic/:requestId/curl` | Get curl command |
 | `GET /api/stats` | Get statistics |
 
-## 🏗️ Architecture
+## Architecture
 
 ### Gateway Server
 - Express HTTP server for public traffic
@@ -142,7 +142,7 @@ devtunnel status
 - Constants and error codes
 - Event-driven logging system
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run shared package tests
@@ -151,14 +151,4 @@ npm test --workspace=packages/shared
 # Expected output: 17 tests passing
 ```
 
-## 📝 Development Phases
 
-- [x] **Phase 1**: Tunnel MVP + Request Forwarding ← Current
-- [ ] **Phase 2**: Smart Inspector + Dashboard
-- [ ] **Phase 3**: Replay + Time Travel
-- [ ] **Phase 4**: Security + Rate Limits
-- [ ] **Phase 5**: Webhook Retry + Metrics + QR
-
-## 📜 License
-
-MIT
