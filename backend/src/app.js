@@ -222,13 +222,16 @@ class GatewayApp {
      */
     async start() {
         return new Promise((resolve, reject) => {
-            this.httpServer.listen(this.config.httpPort, this.config.host, (err) => {
+            // Bind to 0.0.0.0 for Render compatibility
+            const BIND_HOST = '0.0.0.0';
+
+            this.httpServer.listen(this.config.httpPort, BIND_HOST, (err) => {
                 if (err) return reject(err);
 
-                this.wsServer = new WebSocketServer({
-                    port: this.config.wsPort,
-                    host: this.config.host,
-                });
+                this.logger.info(`Server listening on PORT ${this.config.httpPort}`);
+
+                // Tunnel WebSocket Server attached to HTTP server
+                this.wsServer = new WebSocketServer({ server: this.httpServer });
 
                 this.wsHandler = new WebSocketHandler(
                     this.wsServer,
@@ -237,21 +240,17 @@ class GatewayApp {
                     this.config
                 );
 
-                this.wsServer.on('listening', () => {
-                    this.logger.info('Tunnel WebSocket server started');
+                this.logger.info('Tunnel WebSocket server attached to HTTP server');
 
-                    this.dashboardWsHandler = new DashboardWebSocketHandler(
-                        this.httpServer,
-                        this.inspectorService
-                    );
-                    this.logger.info('Dashboard WebSocket server started');
+                this.dashboardWsHandler = new DashboardWebSocketHandler(
+                    this.httpServer,
+                    this.inspectorService
+                );
+                this.logger.info('Dashboard WebSocket server started');
 
-                    this.logger.info('Development API Key: ' + this.authService.getDevKey());
+                this.logger.info('Development API Key: ' + this.authService.getDevKey());
 
-                    resolve();
-                });
-
-                this.wsServer.on('error', reject);
+                resolve();
             });
 
             this.httpServer.on('error', reject);
