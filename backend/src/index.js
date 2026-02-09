@@ -15,7 +15,7 @@ const logger = createLogger({ name: 'Gateway' });
 
 // Configuration from environment or defaults
 const config = {
-    httpPort: parseInt(process.env.HTTP_PORT, 10) || DEFAULT_GATEWAY_PORT,
+    httpPort: parseInt(process.env.PORT, 10) || parseInt(process.env.HTTP_PORT, 10) || DEFAULT_GATEWAY_PORT,
     wsPort: parseInt(process.env.WS_PORT, 10) || DEFAULT_GATEWAY_WS_PORT,
     host: process.env.HOST || 'localhost',
     publicDomain: process.env.PUBLIC_DOMAIN || 'localhost',

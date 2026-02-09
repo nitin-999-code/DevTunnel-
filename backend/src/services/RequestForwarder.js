@@ -340,6 +340,25 @@ class RequestForwarder {
     sanitizeRequestHeaders(headers) {
         const sanitized = { ...headers };
 
+        // Add standard proxy headers if Host is present
+        if (sanitized['host']) {
+            sanitized['x-forwarded-host'] = sanitized['host'];
+
+            // Extract port if present, otherwise default to 80
+            const parts = sanitized['host'].split(':');
+            if (parts.length > 1) {
+                sanitized['x-forwarded-port'] = parts[1];
+            } else {
+                sanitized['x-forwarded-port'] = '80';
+            }
+        }
+
+        // Assume HTTP for now since SSL termination usually happens before Node/Express
+        // or we can inspect req.protocol if available in context
+        if (!sanitized['x-forwarded-proto']) {
+            sanitized['x-forwarded-proto'] = 'http';
+        }
+
         // Remove headers that shouldn't be forwarded
         delete sanitized['host'];
         delete sanitized['connection'];
