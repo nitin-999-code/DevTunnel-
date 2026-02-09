@@ -1,0 +1,32 @@
+{
+    "name": "devtunnel-backend",
+    "version": "1.0.0",
+    "description": "DevTunnel+ Backend Server - handles tunnel connections, API, and request forwarding",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "node --watch src/index.js",
+        "test": "jest --coverage --passWithNoTests",
+        "cli": "node cli-client/src/index.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "ws": "^8.16.0",
+        "cors": "^2.8.5",
+        "helmet": "^7.1.0",
+        "compression": "^1.7.4",
+        "http-proxy": "^1.18.1",
+        "nanoid": "^3.3.7",
+        "commander": "^11.1.0",
+        "chalk": "^4.1.2",
+        "ora": "^5.4.1",
+        "boxen": "^5.1.2",
+        "axios": "^1.6.5"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}
