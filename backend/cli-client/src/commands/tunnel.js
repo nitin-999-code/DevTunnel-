@@ -5,6 +5,11 @@
  * while the main CLI is in index.js
  */
 
+// Gateway URL configuration — environment variables take priority,
+// then explicit options, then these production defaults.
+const GATEWAY_HTTP_URL = process.env.GATEWAY_HTTP_URL || 'https://devtunnel.onrender.com';
+const GATEWAY_WS_URL = process.env.GATEWAY_WS_URL || 'wss://devtunnel.onrender.com';
+
 const WebSocket = require('ws');
 const chalk = require('chalk');
 const ora = require('ora');
@@ -27,9 +32,26 @@ class TunnelClient {
     constructor(localPort, options = {}) {
         this.localPort = parseInt(localPort, 10);
         this.localHost = options.localHost || 'localhost';
-        this.gatewayHost = options.host || 'localhost';
-        this.gatewayPort = options.gatewayPort || 3001;
         this.subdomain = options.subdomain || null;
+
+        // Resolve gateway URLs (same priority as main CLI)
+        if (options.gatewayWsUrl) {
+            this.gatewayWsUrl = options.gatewayWsUrl;
+        } else if (options.host && options.host !== 'devtunnel.onrender.com') {
+            const port = options.gatewayPort || 3001;
+            this.gatewayWsUrl = `ws://${options.host}:${port}`;
+        } else {
+            this.gatewayWsUrl = GATEWAY_WS_URL;
+        }
+
+        if (options.gatewayHttpUrl) {
+            this.gatewayHttpUrl = options.gatewayHttpUrl;
+        } else if (options.host && options.host !== 'devtunnel.onrender.com') {
+            const port = options.gatewayPort || 3000;
+            this.gatewayHttpUrl = `http://${options.host}:${port}`;
+        } else {
+            this.gatewayHttpUrl = GATEWAY_HTTP_URL;
+        }
 
         this.ws = null;
         this.tunnelId = null;
@@ -51,7 +73,7 @@ class TunnelClient {
         const spinner = ora('Connecting to gateway...').start();
 
         return new Promise((resolve, reject) => {
-            const wsUrl = `ws://${this.gatewayHost}:${this.gatewayPort}`;
+            const wsUrl = this.gatewayWsUrl;
             this.ws = new WebSocket(wsUrl);
 
             this.ws.on('open', () => {

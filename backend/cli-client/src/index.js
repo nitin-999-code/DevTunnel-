@@ -28,6 +28,11 @@ const {
 // Package info
 const pkg = require('../../package.json');
 
+// Gateway URL configuration — environment variables take priority,
+// then CLI flags, then these production defaults.
+const GATEWAY_HTTP_URL = process.env.GATEWAY_HTTP_URL || 'https://devtunnel.onrender.com';
+const GATEWAY_WS_URL = process.env.GATEWAY_WS_URL || 'wss://devtunnel.onrender.com';
+
 /**
  * TunnelClient - Real tunneling client with reconnect support
  */
@@ -35,9 +40,30 @@ class TunnelClient {
     constructor(port, options = {}) {
         this.localPort = parseInt(port, 10);
         this.localHost = options.localHost || 'localhost';
-        this.gatewayHost = options.host || 'localhost';
-        this.gatewayPort = options.gatewayPort || 3001;
         this.subdomain = options.subdomain || null;
+
+        // Resolve gateway URLs:
+        // 1. Explicit CLI --gateway-ws-url / --gateway-http-url flags
+        // 2. Environment variables (GATEWAY_WS_URL / GATEWAY_HTTP_URL)
+        // 3. Legacy: if --host flag provided, build ws:// URL from host+port (local dev)
+        if (options.gatewayWsUrl) {
+            this.gatewayWsUrl = options.gatewayWsUrl;
+        } else if (options.host && options.host !== 'devtunnel.onrender.com') {
+            // Legacy local-dev usage: --host localhost --gateway-port 3001
+            const port = options.gatewayPort || 3001;
+            this.gatewayWsUrl = `ws://${options.host}:${port}`;
+        } else {
+            this.gatewayWsUrl = GATEWAY_WS_URL;
+        }
+
+        if (options.gatewayHttpUrl) {
+            this.gatewayHttpUrl = options.gatewayHttpUrl;
+        } else if (options.host && options.host !== 'devtunnel.onrender.com') {
+            const port = options.gatewayPort || 3000;
+            this.gatewayHttpUrl = `http://${options.host}:${port}`;
+        } else {
+            this.gatewayHttpUrl = GATEWAY_HTTP_URL;
+        }
 
         this.ws = null;
         this.tunnelId = null;
@@ -60,6 +86,8 @@ class TunnelClient {
      */
     async start() {
         console.log(chalk.cyan('\n🚀 DevTunnel+ Starting...\n'));
+        console.log(chalk.gray(`   Gateway WS  → ${this.gatewayWsUrl}`));
+        console.log(chalk.gray(`   Gateway HTTP→ ${this.gatewayHttpUrl}\n`));
 
         while (this.shouldReconnect) {
             try {
@@ -87,7 +115,7 @@ class TunnelClient {
     connect() {
         return new Promise((resolve, reject) => {
             const spinner = ora('Connecting to gateway...').start();
-            const wsUrl = `ws://${this.gatewayHost}:${this.gatewayPort}`;
+            const wsUrl = this.gatewayWsUrl;
 
             this.ws = new WebSocket(wsUrl);
 
@@ -362,8 +390,10 @@ program
     .command('start <port>')
     .description('Start a tunnel to localhost:<port>')
     .option('-s, --subdomain <name>', 'Request a specific subdomain')
-    .option('-h, --host <host>', 'Gateway host', 'localhost')
-    .option('-p, --gateway-port <port>', 'Gateway WebSocket port', '3001')
+    .option('--host <host>', 'Gateway host (for local dev, e.g. localhost)')
+    .option('-p, --gateway-port <port>', 'Gateway port (for local dev)', '3001')
+    .option('--gateway-ws-url <url>', 'Full gateway WebSocket URL (overrides --host)')
+    .option('--gateway-http-url <url>', 'Full gateway HTTP URL (overrides --host)')
     .option('-l, --local-host <host>', 'Local host to forward to', 'localhost')
     .action(async (port, options) => {
         // Validate port
@@ -376,7 +406,9 @@ program
         const client = new TunnelClient(portNum, {
             subdomain: options.subdomain,
             host: options.host,
-            gatewayPort: parseInt(options.gatewayPort, 10),
+            gatewayPort: options.gatewayPort ? parseInt(options.gatewayPort, 10) : undefined,
+            gatewayWsUrl: options.gatewayWsUrl,
+            gatewayHttpUrl: options.gatewayHttpUrl,
             localHost: options.localHost,
         });
 
@@ -401,11 +433,24 @@ program
 program
     .command('status')
     .description('Check gateway status')
-    .option('-h, --host <host>', 'Gateway host', 'localhost')
-    .option('-p, --port <port>', 'Gateway HTTP port', '3000')
+    .option('--gateway-http-url <url>', 'Full gateway HTTP URL')
+    .option('--host <host>', 'Gateway host (for local dev)')
+    .option('-p, --port <port>', 'Gateway HTTP port (for local dev)', '3000')
     .action(async (options) => {
+        // Resolve the health-check URL
+        let healthUrl;
+        if (options.gatewayHttpUrl) {
+            healthUrl = `${options.gatewayHttpUrl.replace(/\/$/, '')}/health`;
+        } else if (options.host) {
+            healthUrl = `http://${options.host}:${options.port}/health`;
+        } else {
+            healthUrl = `${GATEWAY_HTTP_URL.replace(/\/$/, '')}/health`;
+        }
+
+        console.log(chalk.gray(`  Checking ${healthUrl}...`));
+
         try {
-            const res = await fetch(`http://${options.host}:${options.port}/health`);
+            const res = await fetch(healthUrl);
             const data = await res.json();
             console.log(chalk.green('✓ Gateway is running'));
             console.log(chalk.gray(`  Tunnels: ${data.tunnels}`));
