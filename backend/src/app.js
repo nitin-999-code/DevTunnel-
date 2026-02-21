@@ -14,6 +14,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
+const httpProxy = require('http-proxy');
 const { WebSocketServer } = require('ws');
 const { createLogger } = require('../shared/src');
 
@@ -81,6 +82,26 @@ class GatewayApp {
 
         // Wire up event handlers for metrics and webhooks
         this.setupEventHandlers();
+
+        // ── Reverse proxy for local Vite frontend ──────────────
+        // Forwards all non-API, non-tunnel HTTP traffic to the
+        // local Vite dev server so the frontend is accessible
+        // through the public tunnel URL.
+        const VITE_TARGET = process.env.VITE_TARGET || 'http://localhost:5173';
+        this.proxy = httpProxy.createProxyServer({
+            target: VITE_TARGET,
+            changeOrigin: true,
+            ws: true,
+        });
+
+        // Prevent the proxy from crashing the process when Vite is down
+        this.proxy.on('error', (err, req, res) => {
+            this.logger.warn('Proxy error (is Vite running?)', { error: err.message });
+            if (res && res.writeHead && !res.headersSent) {
+                res.writeHead(502, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Vite dev server unreachable', detail: err.message }));
+            }
+        });
 
         // Initialize Express app
         this.app = this.createExpressApp();
@@ -212,8 +233,9 @@ class GatewayApp {
             });
         });
 
-        // Public tunnel routes
-        app.use('/', createPublicRouter(this));
+        // Public tunnel routes — pass proxy so non-tunnel
+        // traffic is forwarded to the local Vite dev server.
+        app.use('/', createPublicRouter(this, this.proxy));
 
         // Error handler
         app.use((err, req, res, next) => {
@@ -279,6 +301,9 @@ class GatewayApp {
                         this.dashboardWsHandler.wss.handleUpgrade(req, socket, head, (ws) => {
                             this.dashboardWsHandler.wss.emit('connection', ws, req);
                         });
+                    } else if (pathname.startsWith('/__vite') || pathname.startsWith('/@vite') || pathname === '/') {
+                        // Vite HMR WebSocket — forward to local dev server
+                        this.proxy.ws(req, socket, head);
                     } else {
                         // Everything else → tunnel WebSocket
                         this.wsServer.handleUpgrade(req, socket, head, (ws) => {
