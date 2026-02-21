@@ -163,12 +163,12 @@ class WebSocketHandler {
 
         if (result.success) {
             const { tunnel } = result;
-            const publicUrl = this.buildPublicUrl(tunnel.subdomain);
+            const publicUrl = this.buildPublicUrl(tunnel.tunnelId);
 
             this.send(ws, createTunnelRegisteredMessage({
                 tunnelId: tunnel.tunnelId,
                 publicUrl,
-                subdomain: tunnel.subdomain,
+                subdomain: tunnel.tunnelId,
             }));
 
             this.logger.info(`Tunnel active: ${tunnel.subdomain} -> localhost:${localPort}`, {
@@ -295,11 +295,8 @@ class WebSocketHandler {
     /**
      * Builds public URL for subdomain
      */
-    buildPublicUrl(subdomain) {
-        const port = this.config.httpPort !== 80 && this.config.httpPort !== 443
-            ? `:${this.config.httpPort}`
-            : '';
-        return `http://${subdomain}.${this.config.publicDomain}${port}`;
+    buildPublicUrl(tunnelId) {
+        return `https://${tunnelId}.devtunnel.onrender.com`;
     }
 
     /**

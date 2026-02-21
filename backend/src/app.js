@@ -179,8 +179,30 @@ class GatewayApp {
             const host = req.headers.host || '';
             const parts = host.split('.');
 
-            if (parts.length >= 2 && !['www', 'api'].includes(parts[0])) {
-                req.subdomain = parts[0];
+            let isTunnel = false;
+            let tunnelId = null;
+
+            if (host.includes('devtunnel.onrender.com') || host.includes('onrender.com')) {
+                if (parts.length >= 4 || (host.includes('devtunnel') && parts.length >= 3)) {
+                    const prefix = parts[0];
+                    if (prefix !== 'www' && prefix !== 'api' && prefix !== 'devtunnel') {
+                        tunnelId = prefix;
+                        isTunnel = true;
+                    }
+                }
+            } else if (host.includes('localhost')) {
+                if (parts.length >= 2 && !['www', 'api', 'localhost'].includes(parts[0])) {
+                    tunnelId = parts[0];
+                    isTunnel = true;
+                }
+            } else if (parts.length >= 2 && !['www', 'api'].includes(parts[0])) {
+                tunnelId = parts[0];
+                isTunnel = true;
+            }
+
+            if (isTunnel) {
+                req.subdomain = tunnelId; // compatibility
+                req.tunnelId = tunnelId;
                 req.isTunnelRequest = true;
             } else {
                 req.isTunnelRequest = false;
@@ -271,9 +293,38 @@ class GatewayApp {
                 // ── Explicit upgrade handler ──────────────────────────
                 // This is the single point that receives every HTTP
                 // upgrade request and dispatches it to the right WSS
-                // based on the request URL.
+                // based on the request URL and host.
                 this.httpServer.on('upgrade', (req, socket, head) => {
+                    const host = req.headers.host || '';
                     const pathname = req.url || '/';
+                    const parts = host.split('.');
+
+                    let isTunnelTraffic = false;
+                    let tunnelId = null;
+
+                    if (host.includes('devtunnel.onrender.com') || host.includes('onrender.com')) {
+                        if (parts.length >= 4 || (host.includes('devtunnel') && parts.length >= 3)) {
+                            const prefix = parts[0];
+                            if (prefix !== 'www' && prefix !== 'api' && prefix !== 'devtunnel') {
+                                isTunnelTraffic = true;
+                                tunnelId = prefix;
+                            }
+                        }
+                    } else if (host.includes('localhost')) {
+                        if (parts.length >= 2 && !['www', 'api', 'localhost'].includes(parts[0])) {
+                            isTunnelTraffic = true;
+                            tunnelId = parts[0];
+                        }
+                    }
+
+                    if (isTunnelTraffic) {
+                        // Public websocket traffic over tunnel (Not currently proxied over WS)
+                        // This prevents CLI websocket handler dropping connections or breaking
+                        // We close it gracefully. Support for WS over HTTP tunnel can be added later.
+                        socket.write('HTTP/1.1 501 Not Implemented\r\n\r\n');
+                        socket.destroy();
+                        return;
+                    }
 
                     if (pathname === '/ws/dashboard') {
                         // Dashboard WebSocket

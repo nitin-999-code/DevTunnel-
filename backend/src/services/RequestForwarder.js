@@ -42,19 +42,21 @@ class RequestForwarder {
      * 5. CLI client sends response back over WebSocket
      * 6. Gateway streams response to original HTTP client
      */
-    async forwardRequest({ subdomain, req, res }) {
+    async forwardRequest({ tunnelId, subdomain, req, res }) {
         const requestId = generateRequestId();
         const startTime = Date.now();
 
-        // Find tunnel by subdomain
-        const tunnel = this.tunnelManager.getTunnelBySubdomain(subdomain);
+        const idToLookup = tunnelId || subdomain;
+
+        // Find tunnel by tunnelId or subdomain
+        const tunnel = this.tunnelManager.getTunnelById(idToLookup) || this.tunnelManager.getTunnelBySubdomain(idToLookup);
 
         if (!tunnel) {
-            this.logger.debug(`Tunnel not found: ${subdomain}`);
+            this.logger.debug(`Tunnel not found: ${idToLookup}`);
             return res.status(404).json({
                 error: 'Tunnel not found',
                 code: ERROR_CODES.TUNNEL_NOT_FOUND,
-                subdomain,
+                subdomain: idToLookup,
             });
         }
 
