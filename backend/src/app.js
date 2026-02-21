@@ -143,6 +143,13 @@ class GatewayApp {
         // correctly reads X-Forwarded-* headers (proto, host, IP).
         app.set('trust proxy', true);
 
+        // Tunnel routing (Must be at the very top of route registration)
+        app.use("/tunnel/:tunnelId", (req, res, next) => {
+            req.tunnelId = req.params.tunnelId;
+            req.isTunnelRequest = true;
+            next();
+        });
+
         // Security middleware
         app.use(helmet({ contentSecurityPolicy: false }));
         app.use(createSecurityMiddleware(this.securityService));
@@ -171,13 +178,6 @@ class GatewayApp {
                     duration: `${Date.now() - start}ms`,
                 });
             });
-            next();
-        });
-
-        // Tunnel routing
-        app.use("/tunnel/:tunnelId", (req, res, next) => {
-            req.tunnelId = req.params.tunnelId;
-            req.isTunnelRequest = true;
             next();
         });
 
