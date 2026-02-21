@@ -71,7 +71,7 @@ class RequestForwarder {
             // Collect raw body (already parsed as Buffer by Express)
             const rawBody = req.body && req.body.length > 0 ? req.body : null;
 
-            const forwardedPath = req.originalUrl.replace(`/tunnel/${tunnelId}`, '') || '/';
+            const forwardedPath = req.originalUrl;
 
             // Build complete HTTP request message
             const requestMessage = createHttpRequestMessage({
