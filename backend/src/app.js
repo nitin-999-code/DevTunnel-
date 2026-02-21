@@ -174,39 +174,10 @@ class GatewayApp {
             next();
         });
 
-        // Subdomain extraction
-        app.use((req, res, next) => {
-            const host = req.headers.host || '';
-            const parts = host.split('.');
-
-            let isTunnel = false;
-            let tunnelId = null;
-
-            if (host.includes('devtunnel.onrender.com') || host.includes('onrender.com')) {
-                if (parts.length >= 4 || (host.includes('devtunnel') && parts.length >= 3)) {
-                    const prefix = parts[0];
-                    if (prefix !== 'www' && prefix !== 'api' && prefix !== 'devtunnel') {
-                        tunnelId = prefix;
-                        isTunnel = true;
-                    }
-                }
-            } else if (host.includes('localhost')) {
-                if (parts.length >= 2 && !['www', 'api', 'localhost'].includes(parts[0])) {
-                    tunnelId = parts[0];
-                    isTunnel = true;
-                }
-            } else if (parts.length >= 2 && !['www', 'api'].includes(parts[0])) {
-                tunnelId = parts[0];
-                isTunnel = true;
-            }
-
-            if (isTunnel) {
-                req.subdomain = tunnelId; // compatibility
-                req.tunnelId = tunnelId;
-                req.isTunnelRequest = true;
-            } else {
-                req.isTunnelRequest = false;
-            }
+        // Tunnel routing
+        app.use("/tunnel/:tunnelId", (req, res, next) => {
+            req.tunnelId = req.params.tunnelId;
+            req.isTunnelRequest = true;
             next();
         });
 
@@ -293,28 +264,14 @@ class GatewayApp {
                 // ── Explicit upgrade handler ──────────────────────────
                 // This is the single point that receives every HTTP
                 // upgrade request and dispatches it to the right WSS
-                // based on the request URL and host.
+                // based on the request URL.
                 this.httpServer.on('upgrade', (req, socket, head) => {
-                    const host = req.headers.host || '';
                     const pathname = req.url || '/';
-                    const parts = host.split('.');
 
                     let isTunnelTraffic = false;
-                    let tunnelId = null;
 
-                    if (host.includes('devtunnel.onrender.com') || host.includes('onrender.com')) {
-                        if (parts.length >= 4 || (host.includes('devtunnel') && parts.length >= 3)) {
-                            const prefix = parts[0];
-                            if (prefix !== 'www' && prefix !== 'api' && prefix !== 'devtunnel') {
-                                isTunnelTraffic = true;
-                                tunnelId = prefix;
-                            }
-                        }
-                    } else if (host.includes('localhost')) {
-                        if (parts.length >= 2 && !['www', 'api', 'localhost'].includes(parts[0])) {
-                            isTunnelTraffic = true;
-                            tunnelId = parts[0];
-                        }
+                    if (pathname.startsWith('/tunnel/')) {
+                        isTunnelTraffic = true;
                     }
 
                     if (isTunnelTraffic) {

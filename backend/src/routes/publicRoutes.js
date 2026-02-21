@@ -11,7 +11,7 @@ function createPublicRouter(app) {
     const router = express.Router();
 
     router.all('*', async (req, res, next) => {
-        if (!req.isTunnelRequest || !req.subdomain) {
+        if (!req.isTunnelRequest || !req.tunnelId) {
             return res.status(200).json({
                 name: 'DevTunnel+',
                 version: '1.0.0',
@@ -23,7 +23,7 @@ function createPublicRouter(app) {
 
         try {
             await app.requestForwarder.forwardRequest({
-                subdomain: req.subdomain,
+                tunnelId: req.tunnelId,
                 req,
                 res,
             });

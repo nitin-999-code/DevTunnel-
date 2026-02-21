@@ -171,7 +171,7 @@ class WebSocketHandler {
                 subdomain: tunnel.tunnelId,
             }));
 
-            this.logger.info(`Tunnel active: ${tunnel.subdomain} -> localhost:${localPort}`, {
+            this.logger.info(`Tunnel active: ${tunnel.tunnelId} -> localhost:${localPort}`, {
                 tunnelId: tunnel.tunnelId,
                 publicUrl,
             });
@@ -296,7 +296,7 @@ class WebSocketHandler {
      * Builds public URL for subdomain
      */
     buildPublicUrl(tunnelId) {
-        return `https://${tunnelId}.devtunnel.onrender.com`;
+        return `https://devtunnel.onrender.com/tunnel/${tunnelId}`;
     }
 
     /**

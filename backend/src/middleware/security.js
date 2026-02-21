@@ -136,12 +136,12 @@ function createSecurityMiddleware(securityService) {
 function createTunnelRateLimitMiddleware(rateLimiter) {
     return (req, res, next) => {
         // Only apply to tunnel requests
-        if (!req.subdomain) {
+        if (!req.tunnelId) {
             return next();
         }
 
         // Check tunnel-specific rate limit
-        const result = rateLimiter.checkTunnelLimit(req.subdomain);
+        const result = rateLimiter.checkTunnelLimit(req.tunnelId);
 
         // Add rate limit headers
         res.set({

@@ -42,27 +42,25 @@ class RequestForwarder {
      * 5. CLI client sends response back over WebSocket
      * 6. Gateway streams response to original HTTP client
      */
-    async forwardRequest({ tunnelId, subdomain, req, res }) {
+    async forwardRequest({ tunnelId, req, res }) {
         const requestId = generateRequestId();
         const startTime = Date.now();
 
-        const idToLookup = tunnelId || subdomain;
-
-        // Find tunnel by tunnelId or subdomain
-        const tunnel = this.tunnelManager.getTunnelById(idToLookup) || this.tunnelManager.getTunnelBySubdomain(idToLookup);
+        // Find tunnel by tunnelId
+        const tunnel = this.tunnelManager.getTunnelById(tunnelId);
 
         if (!tunnel) {
-            this.logger.debug(`Tunnel not found: ${idToLookup}`);
+            this.logger.debug(`Tunnel not found: ${tunnelId}`);
             return res.status(404).json({
                 error: 'Tunnel not found',
                 code: ERROR_CODES.TUNNEL_NOT_FOUND,
-                subdomain: idToLookup,
+                tunnelId: tunnelId,
             });
         }
 
         // Verify WebSocket is connected
         if (tunnel.ws.readyState !== 1) {
-            this.logger.warn(`Tunnel WebSocket not ready: ${subdomain}`);
+            this.logger.warn(`Tunnel WebSocket not ready: ${tunnelId}`);
             return res.status(502).json({
                 error: 'Tunnel connection unavailable',
                 code: ERROR_CODES.CONNECTION_CLOSED,
@@ -73,11 +71,18 @@ class RequestForwarder {
             // Collect raw body (already parsed as Buffer by Express)
             const rawBody = req.body && req.body.length > 0 ? req.body : null;
 
+            // Strip prefix from path for local server
+            let forwardedPath = req.originalUrl;
+            const prefix = `/tunnel/${tunnelId}`;
+            if (forwardedPath.startsWith(prefix)) {
+                forwardedPath = forwardedPath.substring(prefix.length) || '/';
+            }
+
             // Build complete HTTP request message
             const requestMessage = createHttpRequestMessage({
                 requestId,
                 method: req.method,
-                path: req.originalUrl,
+                path: forwardedPath,
                 headers: this.sanitizeRequestHeaders(req.headers),
                 body: rawBody,
                 query: req.query,
@@ -87,9 +92,8 @@ class RequestForwarder {
             const inspectData = {
                 requestId,
                 tunnelId: tunnel.tunnelId,
-                subdomain,
                 method: req.method,
-                path: req.originalUrl,
+                path: forwardedPath,
                 headers: { ...req.headers },
                 body: rawBody ? rawBody.toString('utf8') : null,
                 query: req.query,
@@ -130,7 +134,7 @@ class RequestForwarder {
             this.activeRequests.set(requestId, {
                 tunnel,
                 startTime,
-                subdomain,
+                tunnelId,
             });
 
             // Send request through WebSocket to CLI client
@@ -138,8 +142,8 @@ class RequestForwarder {
 
             this.logger.debug(`Request tunneled: ${requestId}`, {
                 method: req.method,
-                path: req.originalUrl,
-                subdomain,
+                path: forwardedPath,
+                tunnelId,
                 bodySize: rawBody ? rawBody.length : 0,
             });
 
@@ -174,7 +178,7 @@ class RequestForwarder {
 
             this.logger.error(`Request tunnel failed: ${requestId}`, {
                 error: error.message,
-                subdomain,
+                tunnelId,
             });
 
             // Record error
@@ -392,7 +396,7 @@ class RequestForwarder {
         const now = Date.now();
         return Array.from(this.activeRequests.entries()).map(([requestId, info]) => ({
             requestId,
-            subdomain: info.subdomain,
+            tunnelId: info.tunnelId,
             duration: now - info.startTime,
         }));
     }
