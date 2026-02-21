@@ -146,7 +146,6 @@ class GatewayApp {
         // Tunnel routing (Must be at the very top of route registration)
         app.use("/tunnel/:tunnelId", (req, res, next) => {
             req.tunnelId = req.params.tunnelId;
-            req.isTunnelRequest = true;
             next();
         });
 
