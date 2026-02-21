@@ -138,6 +138,10 @@ class GatewayApp {
     createExpressApp() {
         const app = express();
 
+        // Trust proxy — required for Render / any reverse-proxy so Express
+        // correctly reads X-Forwarded-* headers (proto, host, IP).
+        app.set('trust proxy', true);
+
         // Security middleware
         app.use(helmet({ contentSecurityPolicy: false }));
         app.use(createSecurityMiddleware(this.securityService));
@@ -151,8 +155,11 @@ class GatewayApp {
         // Compression
         app.use(compression());
 
-        // Body parsing
-        app.use(express.raw({ type: '*/*', limit: '10mb' }));
+        // Body parsing — skip upgrade requests so they pass through untouched
+        app.use((req, res, next) => {
+            if (req.headers.upgrade) return next();
+            express.raw({ type: '*/*', limit: '10mb' })(req, res, next);
+        });
 
         // Request logging
         app.use((req, res, next) => {
@@ -225,13 +232,24 @@ class GatewayApp {
             // Bind to 0.0.0.0 for Render compatibility
             const BIND_HOST = '0.0.0.0';
 
+            // Keep-alive & headers timeout — Render's proxy drops idle
+            // connections after ~60 s; setting these higher keeps the
+            // underlying TCP socket alive through the proxy layer.
+            this.httpServer.keepAliveTimeout = 120_000;   // 120 s
+            this.httpServer.headersTimeout = 125_000;   // slightly above keepAlive
+
             this.httpServer.listen(this.config.httpPort, BIND_HOST, (err) => {
                 if (err) return reject(err);
 
                 this.logger.info(`Server listening on PORT ${this.config.httpPort}`);
 
-                // Tunnel WebSocket Server attached to HTTP server
-                this.wsServer = new WebSocketServer({ server: this.httpServer });
+                // ── Tunnel WebSocket Server (noServer mode) ──────────
+                // Using noServer so we can manually route the HTTP
+                // upgrade event to the correct WSS by URL path.
+                this.wsServer = new WebSocketServer({
+                    noServer: true,
+                    perMessageDeflate: false, // proxies often break permessage-deflate
+                });
 
                 this.wsHandler = new WebSocketHandler(
                     this.wsServer,
@@ -240,14 +258,36 @@ class GatewayApp {
                     this.config
                 );
 
-                this.logger.info('Tunnel WebSocket server attached to HTTP server');
+                this.logger.info('Tunnel WebSocket server created (noServer)');
 
+                // ── Dashboard WebSocket Server (noServer mode) ───────
                 this.dashboardWsHandler = new DashboardWebSocketHandler(
-                    this.httpServer,
+                    null, // no server — we route upgrades manually below
                     this.inspectorService
                 );
-                this.logger.info('Dashboard WebSocket server started');
+                this.logger.info('Dashboard WebSocket server created (noServer)');
 
+                // ── Explicit upgrade handler ──────────────────────────
+                // This is the single point that receives every HTTP
+                // upgrade request and dispatches it to the right WSS
+                // based on the request URL.
+                this.httpServer.on('upgrade', (req, socket, head) => {
+                    const pathname = req.url || '/';
+
+                    if (pathname === '/ws/dashboard') {
+                        // Dashboard WebSocket
+                        this.dashboardWsHandler.wss.handleUpgrade(req, socket, head, (ws) => {
+                            this.dashboardWsHandler.wss.emit('connection', ws, req);
+                        });
+                    } else {
+                        // Everything else → tunnel WebSocket
+                        this.wsServer.handleUpgrade(req, socket, head, (ws) => {
+                            this.wsServer.emit('connection', ws, req);
+                        });
+                    }
+                });
+
+                this.logger.info('HTTP upgrade handler registered');
                 this.logger.info('Development API Key: ' + this.authService.getDevKey());
 
                 resolve();

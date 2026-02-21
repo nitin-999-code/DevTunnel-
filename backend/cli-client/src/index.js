@@ -117,7 +117,20 @@ class TunnelClient {
             const spinner = ora('Connecting to gateway...').start();
             const wsUrl = this.gatewayWsUrl;
 
-            this.ws = new WebSocket(wsUrl);
+            // Proxy-safe WebSocket options:
+            //  - perMessageDeflate off: reverse proxies (Render, Cloudflare)
+            //    often strip or break the permessage-deflate extension.
+            //  - handshakeTimeout 30 s: Render cold-starts can be slow.
+            //  - Explicit headers ensure the upgrade request passes cleanly
+            //    through any L7 proxy that inspects hop-by-hop headers.
+            this.ws = new WebSocket(wsUrl, {
+                perMessageDeflate: false,
+                handshakeTimeout: 30_000,
+                headers: {
+                    'Connection': 'Upgrade',
+                    'Upgrade': 'websocket',
+                },
+            });
 
             this.ws.on('open', () => {
                 spinner.text = 'Registering tunnel...';
@@ -160,14 +173,14 @@ class TunnelClient {
                 resolve(); // Resolve to allow reconnect loop
             });
 
-            // Connection timeout
+            // Connection timeout — 30 s to handle Render cold-starts
             setTimeout(() => {
                 if (!this.isConnected && spinner.isSpinning) {
                     spinner.fail('Connection timeout');
                     this.ws.close();
                     reject(new Error('Connection timeout'));
                 }
-            }, 10000);
+            }, 30_000);
         });
     }
 

@@ -18,11 +18,21 @@ class DashboardWebSocketHandler {
         // Connected dashboard clients
         this.clients = new Set();
 
-        // Create WebSocket server attached to the HTTP server
-        this.wss = new WebSocketServer({
-            server,
-            path: '/ws/dashboard',
-        });
+        // Create WebSocket server.
+        // When `server` is null the parent app uses noServer mode and
+        // routes upgrade events via httpServer.on('upgrade', ...).
+        if (server) {
+            this.wss = new WebSocketServer({
+                server,
+                path: '/ws/dashboard',
+                perMessageDeflate: false,
+            });
+        } else {
+            this.wss = new WebSocketServer({
+                noServer: true,
+                perMessageDeflate: false,
+            });
+        }
 
         this.setupConnectionHandler();
         this.setupInspectorListeners();
