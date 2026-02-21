@@ -71,12 +71,7 @@ class RequestForwarder {
             // Collect raw body (already parsed as Buffer by Express)
             const rawBody = req.body && req.body.length > 0 ? req.body : null;
 
-            // Strip tunnelId from path but keep /tunnel for local server
-            let forwardedPath = req.originalUrl;
-            const prefix = `/tunnel/${tunnelId}`;
-            if (forwardedPath.startsWith(prefix)) {
-                forwardedPath = forwardedPath.replace(prefix, '/tunnel');
-            }
+            const forwardedPath = req.originalUrl.replace(`/tunnel/${tunnelId}`, '') || '/';
 
             // Build complete HTTP request message
             const requestMessage = createHttpRequestMessage({
