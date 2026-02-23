@@ -504,7 +504,7 @@ export default function LandingPage() {
             <footer className="py-12 px-6 border-t border-dark-700">
                 <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-6">
                     <div className="text-gray-500 flex items-center gap-2">
-                        © 2026 DevTunnel+. Built with <span className="text-blue-500">💙</span> for developers.
+                        © 2026 DevTunnel+. Built with <span className="text-cyan-500">&lt;3&gt;</span> for developers.
                     </div>
                     <div className="flex gap-6 text-gray-400">
                         <Link to="/docs" className="hover:text-white transition-colors">Docs</Link>

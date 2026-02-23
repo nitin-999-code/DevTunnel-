@@ -17,7 +17,7 @@ const TUNNEL_CONFIG = {
     // Subdomain constraints
     SUBDOMAIN_MIN_LENGTH: 4,
     SUBDOMAIN_MAX_LENGTH: 32,
-    SUBDOMAIN_PATTERN: /^[a-z0-9][a-z0-9-]*[a-z0-9]$/,
+    SUBDOMAIN_PATTERN: /^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$/,
 
     // Request timeout (ms)
     REQUEST_TIMEOUT: 30000,

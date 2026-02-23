@@ -144,8 +144,22 @@ class GatewayApp {
         app.set('trust proxy', true);
 
         // Tunnel routing (Must be at the very top of route registration)
+        // Check for tunnelId via cookie for assets requested directly from root
+        app.use((req, res, next) => {
+            if (req.headers.cookie) {
+                const match = req.headers.cookie.match(/(?:^|;\s*)devtunnel_id=([^;]+)/);
+                if (match) {
+                    req.tunnelId = match[1];
+                    req.isTunnelRequest = true;
+                }
+            }
+            next();
+        });
+
         app.use("/tunnel/:tunnelId", (req, res, next) => {
             req.tunnelId = req.params.tunnelId;
+            req.isTunnelRequest = true;
+            res.setHeader('Set-Cookie', `devtunnel_id=${req.params.tunnelId}; Path=/; HttpOnly; SameSite=Lax`);
             next();
         });
 
